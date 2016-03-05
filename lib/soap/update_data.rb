@@ -39,22 +39,22 @@ module UpdateData
       execute_sql(model, attr, string_values)
     end
 
-    def get_new_values(currencies, hash)
+    def get_new_values(currencies, hash_old_values)
       output_hash = Hash.new{ |hash, key| hash[key] = [] }
       currencies.each do |hash|
-        @country_values     = get_base_values(hash, output_hash, 'country_values',     'Name',     'CountryCode')
-        @currency_values    = get_base_values(hash, output_hash, 'currency_values',    'Currency', 'CurrencyCode')
-        @association_values = get_base_values(hash, output_hash, 'association_values', 'Name',     'CountryCode',
-                                                                                       'Currency', 'CurrencyCode')
+        @country_values     = get_base_values(hash_old_values, output_hash, 'country_values',     'Name',     'CountryCode')
+        @currency_values    = get_base_values(hash_old_values, output_hash, 'currency_values',    'Currency', 'CurrencyCode')
+        @association_values = get_base_values(hash_old_values, output_hash, 'association_values', 'Name',     'CountryCode',
+                                                                                                  'Currency', 'CurrencyCode')
       end
-      output_hash[:new_countries]    = output_hash[:country_values]     - hash[:old_countries]
-      output_hash[:new_currencies]   = output_hash[:currency_values]    - hash[:old_currencies]
-      output_hash[:new_associations] = output_hash[:association_values] - hash[:old_associations]
+      output_hash[:new_countries]    = output_hash[:country_values]     - hash_old_values[:old_countries]
+      output_hash[:new_currencies]   = output_hash[:currency_values]    - hash_old_values[:old_currencies]
+      output_hash[:new_associations] = output_hash[:association_values] - hash_old_values[:old_associations]
       output_hash
     end
 
-    def get_base_values(hash, new_hash, key_name, *keys)
-      new_hash[key_name.to_sym] << keys.map{ |val| hash[val] }
+    def get_base_values(old_hash, output_hash, key_name, *keys)
+      output_hash[key_name.to_sym] << keys.map{ |val| old_hash[val] }
     end
 
     def clear_array(array)
