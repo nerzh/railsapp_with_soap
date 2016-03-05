@@ -41,11 +41,11 @@ module UpdateData
 
     def get_new_values(currencies, hash_old_values)
       output_hash = Hash.new{ |hash, key| hash[key] = [] }
-      currencies.each do |hash|
-        @country_values     = get_base_values(hash_old_values, output_hash, 'country_values',     'Name',     'CountryCode')
-        @currency_values    = get_base_values(hash_old_values, output_hash, 'currency_values',    'Currency', 'CurrencyCode')
-        @association_values = get_base_values(hash_old_values, output_hash, 'association_values', 'Name',     'CountryCode',
-                                                                                                  'Currency', 'CurrencyCode')
+      currencies.each do |soap_hash|
+        get_base_values(soap_hash, output_hash, 'country_values',     'Name',     'CountryCode')
+        get_base_values(soap_hash, output_hash, 'currency_values',    'Currency', 'CurrencyCode')
+        get_base_values(soap_hash, output_hash, 'association_values', 'Name',     'CountryCode',
+                                                                 'Currency', 'CurrencyCode')
       end
       output_hash[:new_countries]    = output_hash[:country_values]     - hash_old_values[:old_countries]
       output_hash[:new_currencies]   = output_hash[:currency_values]    - hash_old_values[:old_currencies]
@@ -53,8 +53,8 @@ module UpdateData
       output_hash
     end
 
-    def get_base_values(old_hash, output_hash, key_name, *keys)
-      output_hash[key_name.to_sym] << keys.map{ |val| old_hash[val] }
+    def get_base_values(soap_hash, output_hash, key_name, *keys)
+      output_hash[key_name.to_sym] << keys.map{ |val| soap_hash[val] }
     end
 
     def clear_array(array)
