@@ -1,4 +1,4 @@
-.main-content.wrap-row-start-start.h100.w100()
+.main-content.wrap-row-start-start.h100.w100(data-ng-init="init(#{!current_user.nil?})")
   .row-start-start.w100
     .main-title.row-center-center.w100= t('main.currencies')
   .row-center-start.w100
@@ -23,6 +23,6 @@
                       = country.name
                     .country.code.item(ng-class='class.text')
                       = country.code
-                    .control-button(ng-if="#{!current_user.nil?}")
-                      %span.glyphicon.glyphicon-remove.pointer(ng-show="visited" ng-click="visitFalse(#{country.id})")
-                      %span.glyphicon.glyphicon-ok.pointer(ng-hide="visited" ng-click="visitTrue(#{country.id})")
+                    .control-button(ng-if="show_control")
+                      %span.glyphicon.glyphicon-remove.pointer(ng-if="visited" ng-click="visitFalse(#{country.id})")
+                      %span.glyphicon.glyphicon-ok.pointer(ng-if="!visited" ng-click="visitTrue(#{country.id})")

@@ -68,3 +68,21 @@ group :development do
   gem 'spring'
 end
 
+group :test do
+  gem 'rspec-rails'
+
+  gem 'factory_girl_rails'
+
+  gem 'faker'
+
+  gem 'selenium-webdriver'
+
+  gem 'database_cleaner'
+
+  gem 'shoulda-matchers'
+
+  gem 'rspec-retry'
+
+  gem 'rspec-rails-mocha'
+end
+
