@@ -11,7 +11,7 @@
 # runner "MyModel.some_method"
 # rake "some:great:rake:task"
 
-every 1.hourse do
+every :hour do
   set :environment, 'production'
   rake "soap:update_data", :output => {:error => 'log/cron_error.log', :standard => 'log/cron.log'}
 end
