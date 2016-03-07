@@ -33,7 +33,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 
 #
-gem 'puma'
+gem 'puma', '2.16.0'
 #
 gem 'pg'
 #
