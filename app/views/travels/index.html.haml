@@ -8,7 +8,7 @@
           %th= t('main.travel')
           %th= t("country")
           %th
-        %tbody
+        %tbody(ng-cloak)
           - @travels.each do |travel|
             %tr(data-travel-item data-ng-init="init(#{travel.complete?}, #{travel.complete?})")
               %td.col-md-6.column-center-center
@@ -18,7 +18,7 @@
                   .currency.descripton.item.row-center-center.w100
                     = travel.description
                   .travel.date.item.row-center-center.w100
-                    = travel.date&.to_formatted_s(:short)
+                    = travel.date&.to_formatted_s(:long)
               %td.col-md-5.column-start-start
                 - travel.countries.each do |country|
                   .row-start-center(data-country-item data-ng-init="init(#{country.visited})")

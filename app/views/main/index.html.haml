@@ -7,7 +7,7 @@
         %thead
           %th= t("main.currency")
           %th= t("main.country")
-        %tbody
+        %tbody(ng-cloak)
           - @currencies.each do |currency|
             %tr(data-currency-item data-ng-init="init(#{currency.exist?},#{currency.id})")
               %td.col-md-5.column-start-start

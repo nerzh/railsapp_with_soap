@@ -81,8 +81,6 @@ group :test do
 
   gem 'shoulda-matchers'
 
-  gem 'rspec-retry'
-
   gem 'rspec-rails-mocha'
 end
 
