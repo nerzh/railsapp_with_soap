@@ -1,0 +1,15 @@
+.main-content.wrap-row-start-start.h100.w100
+  .row-start-start.w100
+    .main-title.row-center-center.w100= t('main.new_traavel')
+  .row-center-start.w100
+    .table-content.row-center-start.h100.w100
+      = form_for @travelForm, {method: 'POST'} do |f|
+        = f.label :Description, {class: 'form-control'}
+        = f.text_area :description, {'enter-submit'=> 'enter(tavelForm.$valid)', maxlength: 255, resize: "none", class: 'form-control', required: '', 'ng-minlength'=>"1", 'ng-maxlength'=>"255"}
+        = f.label :Date, {class: 'form-control'}
+        = f.datetime_select :date, {class: 'form-control'}
+        = f.label :Countries, {class: 'form-control'}
+        = f.collection_select(:countries, @countries, :id, :name, {class: 'form-control'}, {multiple: true})
+        = f.label :Submit, {class: 'form-control'}
+        %btn.row-end-center
+          = f.submit 'ENTER', {class: 'btn'}

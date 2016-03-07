@@ -1,5 +1,5 @@
 !!!
-%html
+%html(ng-app = "mrSmart")
   %head
     %title= MrSmart
     %meta(name='description' content="#{@description}")
@@ -7,5 +7,14 @@
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all'
     = javascript_include_tag 'application'
-  %body
-    = yield
+  %body(ng-controller="rootCtrl")
+    .my-row
+      .my-column
+        .my-content
+          .my-container.wrap-row-start-between.w100.h100
+            .my-header.w100.h100.row-center-stretch
+              = render partial: 'partial/header'
+            .my-center.w100.wrap-row-center-start.h100
+              = yield
+            .my-footer.w100.wrap-row-center-start.h100
+              = render partial: 'partial/footer'

@@ -1,0 +1,30 @@
+.my-header-menu.row-start-center.w100
+  .navbar.navbar-default.w100
+    .container-fluid
+      .navbar-header
+        %button.navbar-toggle{"data-target" => ".navbar-responsive-collapse", "data-toggle" => "collapse", :type => "button"}
+          %span.icon-bar
+          %span.icon-bar
+          %span.icon-bar
+        %a.navbar-brand(href='/')= t('header.logo')
+      .navbar-collapse.collapse.navbar-responsive-collapse
+        %ul.nav.navbar-nav
+          %li
+            %a(href="#{travels_path}")= t('header.travels_button')
+        %ul.nav.navbar-nav
+          %li
+            %a(href="#{new_travel_path}")= t('header.new_travel_button')
+        %form.navbar-form.navbar-left
+        %ul.nav.navbar-nav.navbar-right
+          %li
+            = link_to t('header.logout'), destroy_user_session_path, {method: 'DELETE', 'ng-hide'=>current_user.nil?}
+            %a(ng-show="#{current_user.nil?}" href="#{new_user_session_path}")= t('header.login')
+          %li.dropdown
+            %a.dropdown-toggle{"data-target" => "#", "data-toggle" => "dropdown", :href => "bootstrap-elements.html"}
+              = t('filters')
+              %b.caret
+            %ul.dropdown-menu
+              %li
+                %a(href='/')= t('full')
+              %li
+                %a(href="#{root_path(actual_currency: true)}")= t('actual')

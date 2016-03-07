@@ -9,8 +9,24 @@
 //
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
-//
+
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
+// require bootstrap-sprockets
+
+// Angular
+//= require angular/angular
+//= require underscore/underscore
+// require restangular/src/restangular
+//= require angular-resource/angular-resource
+
+// require turbolinks
+//= require bootstrap-sass/assets/javascripts/bootstrap-sprockets
+//= require bootstrap-material-design/dist/js/material.min
+//= require bootstrap-material-design/dist/js/ripples.min
+
+//= require ./mrSmart
 //= require_tree .
+
+
+$.material.init()

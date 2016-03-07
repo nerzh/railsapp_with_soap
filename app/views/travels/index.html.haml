@@ -1,0 +1,32 @@
+.main-content.wrap-row-start-start.h100.w100()
+  .row-start-start.w100
+    .main-title.row-center-center.w100 Travels
+  .row-center-start.w100
+    .table-content.row-center-start.h100.w100
+      %table.table
+        %thead
+          %th= t('main.travel')
+          %th= t("country")
+          %th
+        %tbody
+          - @travels.each do |travel|
+            %tr(data-travel-item data-ng-init="init(#{travel.complete?}, #{travel.complete?})")
+              %td.col-md-6.column-center-center
+                .row-start-start
+                  .currency.status.item.row-center-center
+                    %span.glyphicon.glyphicon-ok.pointer(ng-show="complete")
+                  .currency.descripton.item.row-center-center.w100
+                    = travel.description
+                  .travel.date.item.row-center-center.w100
+                    = travel.date&.to_formatted_s(:short)
+              %td.col-md-5.column-start-start
+                - travel.countries.each do |country|
+                  .row-start-center(data-country-item data-ng-init="init(#{country.visited})")
+                    .country.name.item(ng-class='class.text')
+                      = country.name
+                    .country.code.item(ng-class='class.text')
+                      = country.code
+              %td.col-md-1.row-center-center
+                .control-button.row-center-center
+                  %span.glyphicon.glyphicon-remove.pointer(ng-show="complete" ng-click="uncompleted(#{travel.id})")
+                  %span.glyphicon.glyphicon-ok.pointer(ng-hide="complete" ng-click="completed(#{travel.id})")

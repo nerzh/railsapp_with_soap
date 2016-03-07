@@ -32,9 +32,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-
-
-# gem 'devise'
 #
 gem 'puma'
 #
@@ -47,7 +44,16 @@ gem 'bower-rails', '~> 0.10.0'
 gem 'savon', '~> 2.0'
 #
 gem 'whenever'
-
+#
+gem 'responders', '~> 2.0'
+#
+gem 'devise'
+#
+gem 'cancancan'
+#
+gem 'virtus-multiparams', :git => 'git://github.com/sj26/virtus-multiparams.git'
+#
+gem 'virtus'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
