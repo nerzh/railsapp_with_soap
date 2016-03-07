@@ -23,3 +23,5 @@
 *.DS_Store
 /doc
 /public
+/config/puma.rb
+/shared
