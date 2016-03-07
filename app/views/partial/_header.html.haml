@@ -17,8 +17,10 @@
         %form.navbar-form.navbar-left
         %ul.nav.navbar-nav.navbar-right
           %li
-            = link_to t('header.logout'), destroy_user_session_path, {method: 'DELETE', 'ng-hide'=>current_user.nil?}
-            %a(ng-show="#{current_user.nil?}" href="#{new_user_session_path}")= t('header.login')
+            - if current_user.nil?
+              %a(href="#{new_user_session_path}")= t('header.login')
+            - else
+              = link_to t('header.logout'), destroy_user_session_path, {method: 'DELETE'}
           %li.dropdown
             %a.dropdown-toggle{"data-target" => "#", "data-toggle" => "dropdown", :href => "bootstrap-elements.html"}
               = t('filters')
