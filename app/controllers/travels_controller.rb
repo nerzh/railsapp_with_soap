@@ -12,7 +12,7 @@ class TravelsController < ApplicationController
   end
 
   def create
-    return redirect_to travels_path if TravelForm.new.save(params)
+    return redirect_to travels_path if TravelForm.new.init(params).save
     redirect_to new_travel_path
   end
 

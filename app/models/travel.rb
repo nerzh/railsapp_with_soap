@@ -7,7 +7,7 @@ class Travel < ActiveRecord::Base
   validates :description, length: { within: 1..255 }, presence: true
 
   def complete?
-    self.complete_date ? true : false
+    complete_date ? true : false
   end
 
 end

@@ -9,18 +9,18 @@ class TravelForm
   end
 
   attr_reader :travel
-
   attribute :description,   String
   attribute :date,          DateTime
   attribute :complete_date, DateTime
   attribute :countries,     Array[String]
 
+  validate :validation_model
+
   def persisted?
     false
   end
 
-  def save(params)
-    initialize(travels_params(params))
+  def save
     if valid?
       persist!
       true
@@ -30,16 +30,24 @@ class TravelForm
   end
 
   def update(params)
-    Travel.find_by(id: params[:id])&.update(travels_params(params))
+    Travel.find_by(id: params[:id])&.update!(travels_params(params))
+  end
+
+  def init(params)
+    initialize(travels_params(params))
+    get_countries
+    hash_params = {description:   @description, date: @date,
+                   complete_date: @complete_date,
+                   countries:     @array_countries}
+    @travel = Travel.new
+    @travel.assign_attributes(hash_params)
+    self
   end
 
   private
 
   def persist!
-    get_countries
-    @travel = Travel.new(description:   @description, date: @date,
-                         complete_date: @complete_date,
-                         countries:     @array_countries ).save!(validate: false)
+    @travel.save!(validate: false)
   end
 
   def get_countries
@@ -53,6 +61,16 @@ class TravelForm
 
   def travels_params(params)
     params.require(:travel).permit(:description, :date, :complete_date, countries: [])
+  end
+
+  def validation_model
+    set_errors( @travel.errors ) unless @travel.valid?
+  end
+
+  def set_errors(model_errors)
+    model_errors.each do |attribute, message|
+      errors.add(attribute, message)
+    end
   end
 
 end

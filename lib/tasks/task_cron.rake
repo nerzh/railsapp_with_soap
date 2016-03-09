@@ -24,3 +24,18 @@ namespace :soap do
   end
 
 end
+
+def get_new_values(currencies, hash_old_values)
+  output_hash = Hash.new{ |hash, key| hash[key] = [] }
+  base_hash   = Hash.new{ |hash, key| hash[key] = [] }
+  currencies.each do |soap_hash|
+    get_base_values(soap_hash, base_hash, 'country_values',     'Name',     'CountryCode')
+    get_base_values(soap_hash, base_hash, 'currency_values',    'Currency', 'CurrencyCode')
+    get_base_values(soap_hash, base_hash, 'association_values', 'Name',     'CountryCode',
+                                                                'Currency', 'CurrencyCode')
+  end
+  output_hash[:new_countries]    = clear_array(base_hash[:country_values])     - hash_old_values[:old_countries]
+  output_hash[:new_currencies]   = clear_array(base_hash[:currency_values])    - hash_old_values[:old_currencies]
+  output_hash[:new_associations] = clear_array(base_hash[:association_values]) - hash_old_values[:old_associations]
+  output_hash
+end

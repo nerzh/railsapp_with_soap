@@ -5,7 +5,7 @@
     .table-content.row-center-start.h100.w100
       = form_for @travelForm, {method: 'POST'} do |f|
         = f.label :Description, {class: 'form-control'}
-        = f.text_area :description, {'enter-submit'=> 'enter(tavelForm.$valid)', maxlength: 255, resize: "none", class: 'form-control', required: '', 'ng-minlength'=>"1", 'ng-maxlength'=>"255"}
+        = f.text_area :description, {maxlength: 255, resize: "none", class: 'form-control', required: '', 'ng-minlength'=>"1", 'ng-maxlength'=>"255"}
         = f.label :Date, {class: 'form-control'}
         = f.datetime_select :date, {class: 'form-control'}
         = f.label :Countries, {class: 'form-control'}
