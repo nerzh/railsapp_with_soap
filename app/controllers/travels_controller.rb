@@ -1,4 +1,3 @@
-require_relative "../../app/forms/travels_forms"
 class TravelsController < ApplicationController
   authorize_resource
 

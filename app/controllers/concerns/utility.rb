@@ -1,4 +1,4 @@
-module ControllerUtility
+module Utility
   extend ActiveSupport::Concern
 
   def hash_exist_currency(country)

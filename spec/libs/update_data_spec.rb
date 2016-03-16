@@ -98,6 +98,7 @@ describe TestModuleUpdateData, type: :lib do
 
   context 'insert_array_with_sql' do
     it "check receive methods" do
+      expect(self).to receive(:del_double).and_return(true)
       expect(self).to receive(:unescape_value).and_return(true)
       expect(self).to receive(:sql_values).and_return(true)
       expect(self).to receive(:execute_sql).and_return(true)
@@ -115,6 +116,13 @@ describe TestModuleUpdateData, type: :lib do
       get_base_values(soap_hash, output_hash, key_name2, 'val3', 'val4')
       expect(output_hash[:new_hash][0]).to  eq(['attr', 'attr2'])
       expect(output_hash[:new_hash2][0]).to eq(['attr3', 'attr4'])
+    end
+  end
+
+  context 'del_double' do
+    it "removes duplicates of code from array [[..],[..]]" do
+      array    = [[3,45],[nil, 'code'],['attr','code'],[nil,45],['attr','attr']]
+      expect(del_double(array)).to eq([[3, 45], [nil, "code"], ["attr", "attr"]])
     end
   end
 

@@ -1,8 +1,7 @@
 module ModelUtility
   def currency_exist?
     self.currencies.includes(:countries).each do |currency|
-      return currency.exist! if currency.countries.where(visited: false).empty?
-      currency.absent!
+      currency.countries.where(visited: false).empty? ? currency.exist! : currency.absent!
     end
   end
 

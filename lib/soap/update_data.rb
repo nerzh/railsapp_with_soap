@@ -37,6 +37,7 @@ module UpdateData
     end
 
     def insert_array_with_sql(model, array, *attr)
+      array = del_double(array)
       unescape_value(array)
       string_values = sql_values(array)
       execute_sql(model, attr, string_values)
@@ -53,6 +54,12 @@ module UpdateData
 
     def unescape_value(array)
       array.each{ |arr| arr.map! { |val| val.gsub(/'/){%q('')} } }
+    end
+
+    def del_double(array)
+      output_aray = []
+      array.each { |arr| output_aray << arr unless output_aray.rassoc(arr[1]) }
+      output_aray
     end
 
 end

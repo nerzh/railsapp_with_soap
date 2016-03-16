@@ -1,8 +1,7 @@
-require_relative "concerns/utility"
 class CountriesController < ApplicationController
   authorize_resource
   before_action :define_country, only: [:update]
-  include ControllerUtility
+  include Utility
 
   def update
     @country.update(countries_params)
