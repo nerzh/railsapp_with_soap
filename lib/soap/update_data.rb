@@ -31,9 +31,9 @@ module UpdateData
     def sql_values(array)
       time = Time.now
       if array[0].class == Array
-        return array.map{ |val| "('" << val.join("', '") << "', '#{time}', '#{time}')"}.join(", ")
+        return array.map{ |val| "('#{val.join("', '")}', '#{time}', '#{time}')"}.join(", ")
       end
-      array.map{ |val| "('" << val << "', '#{time}', '#{time}')" }.join(", ")
+      array.map{ |val| "('#{val}', '#{time}', '#{time}')" }.join(", ")
     end
 
     def insert_array_with_sql(model, array, *attr)
